@@ -1,0 +1,25 @@
+{
+  "units": "US",
+  "fc": 4000,
+  "fy": 60000,
+  "loading": {
+    "mode": "simple_span",
+    "span_length": 20,
+    "dead_load": 1000,
+    "live_load": 2000
+  },
+  "objective": "minimize_steel",
+  "constraints": {
+    "b_min": 10,
+    "b_max": 18,
+    "b_step": 2,
+    "h_min": 18,
+    "h_max": 30,
+    "cover": 1.5,
+    "max_layers": 2
+  },
+  "bar_preferences": {
+    "min_bar_size": "4",
+    "max_bar_size": "11"
+  }
+}

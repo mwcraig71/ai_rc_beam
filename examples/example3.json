@@ -1,0 +1,21 @@
+{
+  "units": "SI",
+  "fc": 30,
+  "fy": 420,
+  "loading": {
+    "mode": "simple_span",
+    "span_length": 8,
+    "dead_load": 20,
+    "live_load": 30
+  },
+  "objective": "minimize_steel",
+  "constraints": {
+    "b_min": 300,
+    "b_max": 500,
+    "b_step": 50,
+    "h_min": 500,
+    "h_max": 800,
+    "cover": 40,
+    "max_layers": 2
+  }
+}

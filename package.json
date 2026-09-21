@@ -1,0 +1,29 @@
+{
+  "name": "rc-beam-design",
+  "version": "1.0.0",
+  "description": "AI-first reinforced concrete beam design tool",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "dev:web": "npm run dev --workspace=apps/web",
+    "design": "node apps/cli/dist/index.js design"
+  },
+  "keywords": [
+    "structural-engineering",
+    "reinforced-concrete",
+    "beam-design",
+    "ACI-318"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "typescript": "^5.7.3",
+    "vitest": "^2.1.8"
+  }
+}
