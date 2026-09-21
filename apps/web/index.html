@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RC Beam Design - AI-First Structural Engineering</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+    
+    header {
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    
+    .content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      padding: 2rem;
+    }
+    
+    @media (max-width: 968px) {
+      .content {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .section {
+      background: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+    }
+    
+    .section h2 {
+      color: #1e3c72;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+    
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+      color: #555;
+    }
+    
+    input, select {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    
+    input:focus, select:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    
+    .inline-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    
+    button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+    
+    button:active {
+      transform: translateY(0);
+    }
+    
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    
+    .results {
+      grid-column: 1 / -1;
+    }
+    
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .result-card {
+      background: white;
+      padding: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+    }
+    
+    .result-card h3 {
+      color: #1e3c72;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+    
+    .result-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #667eea;
+    }
+    
+    .result-label {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
+    .checks {
+      margin-top: 1rem;
+    }
+    
+    .check-item {
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .check-item.passed {
+      background: #d4edda;
+      color: #155724;
+    }
+    
+    .check-item.failed {
+      background: #f8d7da;
+      color: #721c24;
+    }
+    
+    .warning {
+      background: #fff3cd;
+      color: #856404;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-top: 1rem;
+      border: 1px solid #ffeaa7;
+    }
+    
+    .rationale {
+      background: white;
+      padding: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      margin-top: 1rem;
+      white-space: pre-wrap;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+    
+    .error {
+      background: #f8d7da;
+      color: #721c24;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-top: 1rem;
+      border: 1px solid #f5c6cb;
+    }
+    
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🏗️ RC Beam Design</h1>
+      <p>AI-First Reinforced Concrete Beam Design per ACI 318-19</p>
+    </header>
+    
+    <div class="content">
+      <div class="section">
+        <h2>Material Properties</h2>
+        
+        <div class="form-group">
+          <label>Unit System</label>
+          <select id="units">
+            <option value="US">US Customary</option>
+            <option value="SI">SI (Metric)</option>
+          </select>
+        </div>
+        
+        <div class="inline-group">
+          <div class="form-group">
+            <label>f'c <span class="unit-fc">(psi)</span></label>
+            <input type="number" id="fc" value="4000">
+          </div>
+          
+          <div class="form-group">
+            <label>fy <span class="unit-fy">(psi)</span></label>
+            <input type="number" id="fy" value="60000">
+          </div>
+        </div>
+      </div>
+      
+      <div class="section">
+        <h2>Loading</h2>
+        
+        <div class="form-group">
+          <label>Load Type</label>
+          <select id="loadType">
+            <option value="simple_span">Simple Span (DL + LL)</option>
+            <option value="direct">Direct (Mu, Vu)</option>
+          </select>
+        </div>
+        
+        <div id="simpleSpanInputs">
+          <div class="form-group">
+            <label>Span Length <span class="unit-length">(ft)</span></label>
+            <input type="number" id="span" value="20">
+          </div>
+          
+          <div class="inline-group">
+            <div class="form-group">
+              <label>Dead Load <span class="unit-load">(lb/ft)</span></label>
+              <input type="number" id="deadLoad" value="1000">
+            </div>
+            
+            <div class="form-group">
+              <label>Live Load <span class="unit-load">(lb/ft)</span></label>
+              <input type="number" id="liveLoad" value="2000">
+            </div>
+          </div>
+        </div>
+        
+        <div id="directInputs" class="hidden">
+          <div class="inline-group">
+            <div class="form-group">
+              <label>Mu <span class="unit-moment">(kip-ft)</span></label>
+              <input type="number" id="mu" value="150">
+            </div>
+            
+            <div class="form-group">
+              <label>Vu <span class="unit-shear">(kip)</span></label>
+              <input type="number" id="vu" value="25">
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="section">
+        <h2>Design Objective</h2>
+        
+        <div class="form-group">
+          <label>Objective</label>
+          <select id="objective">
+            <option value="minimize_steel">Minimize Steel Area</option>
+            <option value="minimize_depth">Minimize Beam Depth</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>Clear Cover <span class="unit-length">(in)</span></label>
+          <input type="number" id="cover" value="1.5" step="0.1">
+        </div>
+      </div>
+      
+      <div class="section">
+        <h2>Actions</h2>
+        <button id="designBtn">Design Beam</button>
+      </div>
+      
+      <div class="section results hidden" id="results">
+        <h2>Design Results</h2>
+        
+        <div class="result-grid">
+          <div class="result-card">
+            <h3>Section</h3>
+            <div class="result-value" id="sectionSize">-</div>
+            <div class="result-label">b × h</div>
+          </div>
+          
+          <div class="result-card">
+            <h3>Tension Steel</h3>
+            <div class="result-value" id="tensionSteel">-</div>
+            <div class="result-label">As</div>
+          </div>
+          
+          <div class="result-card">
+            <h3>Steel Ratio</h3>
+            <div class="result-value" id="rho">-</div>
+            <div class="result-label">ρ</div>
+          </div>
+          
+          <div class="result-card">
+            <h3>Moment Capacity</h3>
+            <div class="result-value" id="capacity">-</div>
+            <div class="result-label">φMn / Mu</div>
+          </div>
+        </div>
+        
+        <div class="checks" id="checks"></div>
+        
+        <div id="warnings"></div>
+        
+        <div class="rationale" id="rationale"></div>
+      </div>
+      
+      <div class="error hidden" id="error"></div>
+    </div>
+  </div>
+  
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

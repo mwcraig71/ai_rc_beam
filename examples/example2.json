@@ -1,0 +1,20 @@
+{
+  "units": "US",
+  "fc": 5000,
+  "fy": 60000,
+  "loading": {
+    "mode": "direct",
+    "Mu": 400,
+    "Vu": 50
+  },
+  "objective": "minimize_depth",
+  "constraints": {
+    "b_min": 14,
+    "b_max": 18,
+    "b_step": 2,
+    "h_min": 24,
+    "h_max": 40,
+    "cover": 1.5,
+    "max_layers": 2
+  }
+}

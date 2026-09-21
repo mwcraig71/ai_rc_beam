@@ -1,0 +1,19 @@
+{
+  "name": "@rc-beam/web",
+  "version": "1.0.0",
+  "description": "Web UI for RC beam design",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@rc-beam/core": "file:../../packages/core"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.7"
+  }
+}

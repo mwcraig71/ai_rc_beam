@@ -1,0 +1,21 @@
+{
+  "name": "@rc-beam/cli",
+  "version": "1.0.0",
+  "description": "CLI for RC beam design",
+  "type": "module",
+  "bin": {
+    "rc-beam": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "node --loader ts-node/esm src/index.ts"
+  },
+  "dependencies": {
+    "@rc-beam/core": "file:../../packages/core",
+    "commander": "^12.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "typescript": "^5.7.3"
+  }
+}
